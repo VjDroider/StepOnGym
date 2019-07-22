@@ -24,7 +24,7 @@ public class FragmentHome extends Fragment {
 
 
     public FragmentHome() {
-        // Required empty public constructor
+
     }
 
 
@@ -41,33 +41,7 @@ public class FragmentHome extends Fragment {
 
     }
 
-//        @Override
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.tvFragHomeMen:
-//
-//                break;
-//        case R.id.tvFragHomeWomen:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//        case R.id.tvFragHomeChild:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//        case R.id.tvFragHomeWeight:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//        case R.id.tvFragHomeDiet:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//        case R.id.tvFragHomeGym:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//        case R.id.tvFragHomeAboutUs:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
-//                break;
-//
-//        }
-//    }
+
     @OnClick(R.id.tvFragHomeMen)
     public void tvFragMenClicked(View view){
         tFragmentManager.beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
