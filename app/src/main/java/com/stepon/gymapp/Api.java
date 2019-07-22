@@ -1,7 +1,7 @@
 package com.stepon.gymapp;
 
 
-import com.stepon.gymapp.model.ModelLogin;
+import com.stepon.gymapp.model.login.ModelLogin;
 import com.stepon.gymapp.model.ModelRegister;
 
 import retrofit2.Call;

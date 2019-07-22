@@ -1,5 +1,7 @@
 package com.stepon.gymapp.activity;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.stepon.gymapp.Fragment.AboutUsFragment;
 import com.stepon.gymapp.Fragment.ChildFragment;
@@ -34,14 +37,18 @@ import com.stepon.gymapp.Fragment.MenFragment;
 import com.stepon.gymapp.Fragment.WieghtFragment;
 import com.stepon.gymapp.Fragment.WomenFragment;
 import com.stepon.gymapp.R;
+import com.stepon.gymapp.storage.SharedPrefManager;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private SharedPrefManager tSharedPrefManager;
+    private Context tContext;
     TabLayout myTab;
     ViewPager myViewPager;
+    private ImageView ivLogout;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -50,9 +57,19 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        tContext = MainActivity.this;
+        tSharedPrefManager = new SharedPrefManager(tContext);
 //TabLayout
         myTab = findViewById(R.id.view);
         myViewPager = findViewById(R.id.mypager);
+        ivLogout = findViewById(R.id.ivLogout);
+        ivLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tSharedPrefManager.clearUserData();
+                startActivity(new Intent(MainActivity.this, SplashScreen.class));
+            }
+        });
         myViewPager.setAdapter(new MyOwnPagerAdapter(getSupportFragmentManager()));
         myTab.setupWithViewPager(myViewPager);
 

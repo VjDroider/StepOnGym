@@ -1,11 +1,11 @@
 package com.stepon.gymapp.activity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,14 +16,18 @@ import android.widget.Toast;
 
 import com.stepon.gymapp.R;
 import com.stepon.gymapp.RetrofitClient;
-import com.stepon.gymapp.model.ModelLogin;
+import com.stepon.gymapp.model.login.ModelLogin;
+import com.stepon.gymapp.storage.SharedPrefManager;
+import com.stepon.gymapp.utils.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
+    private SharedPrefManager tSharedPrefManager;
+    private Context tContext;
     EditText etemail, etpass;
     Button btn;
 
@@ -32,6 +36,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        tContext = LoginActivity.this;
+        tSharedPrefManager = new SharedPrefManager(tContext);
 
         etemail = findViewById(R.id.et_email_log);
         etpass = findViewById(R.id.et_pass_pass);
@@ -83,8 +89,22 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<ModelLogin> call, Response<ModelLogin> response) {
 
 
-                ModelLogin ml = response.body();
-                Toast.makeText(getApplicationContext(), ml.getMessage(), Toast.LENGTH_LONG).show();
+                ModelLogin tModel = response.body();
+                Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
+
+                String strId = tModel.getUser().getId();
+                String strName = tModel.getUser().getName();
+                String strMobile = tModel.getUser().getMobile();
+                String strEmail = tModel.getUser().getEmail();
+                String strDob = tModel.getUser().getUserDob();
+                String strAddress = tModel.getUser().getAddress();
+                String strDoj = tModel.getUser().getCreatedAt();
+                tSharedPrefManager.setUserData(strId, strName, strMobile, strEmail, strDob, strDoj);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+                finish();
+
 
 
             }
@@ -92,10 +112,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(Call<ModelLogin> call, Throwable t) {
 
-                Toast.makeText(getApplicationContext(), "Failed Check Network Connectivity", Toast.LENGTH_LONG).show();
+                Log.d(Constant.TAG, "Login Failed : "+t);
             }
         });
-
 
     }
 
@@ -105,8 +124,7 @@ public class Login extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btn_log:
                 userLogin();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+
                 break;
         }
     }

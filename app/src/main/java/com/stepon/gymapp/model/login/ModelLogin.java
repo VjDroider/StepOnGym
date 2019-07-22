@@ -1,10 +1,10 @@
-package com.stepon.gymapp.model;
+package com.stepon.gymapp.model.login;
 
 
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.stepon.gymapp.User;
+import com.stepon.gymapp.model.login.User;
 
 
 public class ModelLogin{
