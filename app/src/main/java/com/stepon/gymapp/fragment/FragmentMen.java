@@ -1,5 +1,4 @@
-package com.stepon.gymapp.Fragment;
-
+package com.stepon.gymapp.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,13 +8,8 @@ import android.view.ViewGroup;
 
 import com.stepon.gymapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class DietFragment extends Fragment {
-
-
-    public DietFragment() {
+public class FragmentMen extends Fragment {
+    public FragmentMen() {
         // Required empty public constructor
     }
 
@@ -24,7 +18,7 @@ public class DietFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diet, container, false);
-    }
+        return inflater.inflate(R.layout.fragment_men, container, false);
 
+    }
 }

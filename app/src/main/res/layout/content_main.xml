@@ -39,7 +39,7 @@
         android:id="@+id/mypager"
         android:layout_centerHorizontal="true"/>
     <FrameLayout
-        android:id="@+id/frame_container"
+        android:id="@+id/container_main"
         android:layout_below="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

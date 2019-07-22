@@ -1,4 +1,4 @@
-package com.stepon.gymapp.Fragment;
+package com.stepon.gymapp.fragment;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.stepon.gymapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WieghtFragment extends Fragment {
+public class DietFragment extends Fragment {
 
 
-    public WieghtFragment() {
+    public DietFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class WieghtFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wieght, container, false);
+        return inflater.inflate(R.layout.fragment_diet, container, false);
     }
 
 }

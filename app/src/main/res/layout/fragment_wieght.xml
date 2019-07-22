@@ -3,13 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.WieghtFragment">
+    android:background="@color/colorLightGreen"
+    tools:context=".fragment.WeightFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/tvStyleHeader"
+                android:text="Weight" />
+
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week One"
+                />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Two"
+                />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Three" />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Four"/>
+
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Five" />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Six"
+                />
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Seven"
+                />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Eight"
+                />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Nine" />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Ten"/>
+
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Eleven" />
+
+            <TextView
+                style="@style/tvStyleMain"
+                android:text="Week Twelve"
+                />
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

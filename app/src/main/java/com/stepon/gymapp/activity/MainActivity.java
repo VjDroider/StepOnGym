@@ -2,19 +2,13 @@ package com.stepon.gymapp.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.view.Gravity;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,21 +21,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.stepon.gymapp.Fragment.AboutUsFragment;
-import com.stepon.gymapp.Fragment.ChildFragment;
-import com.stepon.gymapp.Fragment.DietFragment;
-import com.stepon.gymapp.Fragment.ExcerciseFragment;
-import com.stepon.gymapp.Fragment.GymFragment;
-import com.stepon.gymapp.Fragment.MenFragment;
-import com.stepon.gymapp.Fragment.WieghtFragment;
-import com.stepon.gymapp.Fragment.WomenFragment;
+import com.stepon.gymapp.fragment.AboutUsFragment;
+import com.stepon.gymapp.fragment.ChildFragment;
+import com.stepon.gymapp.fragment.DietFragment;
+import com.stepon.gymapp.fragment.FragmentHome;
+import com.stepon.gymapp.fragment.FragmentMen;
+import com.stepon.gymapp.fragment.GymFragment;
+import com.stepon.gymapp.fragment.WeightFragment;
+import com.stepon.gymapp.fragment.WomenFragment;
 import com.stepon.gymapp.R;
 import com.stepon.gymapp.storage.SharedPrefManager;
 
 
+
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
 
     private SharedPrefManager tSharedPrefManager;
@@ -50,6 +48,8 @@ public class MainActivity extends AppCompatActivity
     ViewPager myViewPager;
     private ImageView ivLogout;
 
+
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         tContext = MainActivity.this;
         tSharedPrefManager = new SharedPrefManager(tContext);
+
+
+
+
 //TabLayout
         myTab = findViewById(R.id.view);
         myViewPager = findViewById(R.id.mypager);
@@ -117,7 +122,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -171,9 +175,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     class MyOwnPagerAdapter extends FragmentPagerAdapter {
 
-        String data[] = {"Home", "Men", "Women", "Gym", "Diet", "Weight", "Child", "AboutUs"};
+        String data[] = {"Home", "Men", "Women", "Child", "Gym", "Diet", "Weight", "AboutUs"};
 
 
         public MyOwnPagerAdapter(FragmentManager fm) {
@@ -185,40 +190,39 @@ public class MainActivity extends AppCompatActivity
 
             if (position == 0) {
 
-                return new MenFragment();
+                return new FragmentHome();
             }
-
 
             if (position == 1) {
 
-                return new WomenFragment();
+                return new FragmentMen();
 
             }
             if (position == 2) {
 
-                return new ChildFragment();
+                return new WomenFragment();
             }
             if (position == 3) {
+
+                return new ChildFragment();
+            }
+
+            if (position == 4) {
 
                 return new GymFragment();
             }
 
-            if (position == 4) {
+            if (position == 5) {
 
                 return new DietFragment();
             }
 
 
-            if (position == 5) {
-
-                return new WieghtFragment();
-            }
-
-
             if (position == 6) {
 
-                return new ExcerciseFragment();
+                return new WeightFragment();
             }
+
 
             if (position == 7) {
 
