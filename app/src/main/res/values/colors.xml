@@ -3,4 +3,18 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="lightGrey">#DC0F0F0F</color>
+    <color name="colorLightGreen">#009688</color>
+
+    <color name="colorLightOrange">#FF5722</color>
+    <color name="Blue">#3F51B5</color>
+    <color name="Orange">#FF5722</color>
+    <color name="LightOrange">#C0522F</color>
+    <color name="black">#000</color>
+    <color name="magneta">#0fbbf1</color>
+    <color name="white">#F8FAFA</color>
+    <color name="transparent">#383836</color>
+
+
 </resources>
