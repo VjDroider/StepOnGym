@@ -9,6 +9,20 @@
     tools:context=".activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        />
+
+
+
+
+
     <view
         android:id="@+id/view"
         class="android.support.design.widget.TabLayout"
