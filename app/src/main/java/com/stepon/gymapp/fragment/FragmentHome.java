@@ -1,16 +1,14 @@
 package com.stepon.gymapp.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.stepon.gymapp.R;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,10 +19,8 @@ public class FragmentHome extends Fragment {
 
 
     private FragmentManager tFragmentManager;
-
-
+    private Context tContext;
     public FragmentHome() {
-
     }
 
 
@@ -36,6 +32,7 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         ButterKnife.bind(this, view);
         tFragmentManager = getFragmentManager();
+        tContext = getContext();
         return view;
 
 
@@ -44,11 +41,12 @@ public class FragmentHome extends Fragment {
 
     @OnClick(R.id.tvFragHomeMen)
     public void tvFragMenClicked(View view){
-        tFragmentManager.beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
+            tFragmentManager.beginTransaction().replace(R.id.container_main, new FragmentMen()).addToBackStack(null).commit();
+
     }
   @OnClick(R.id.tvFragHomeWomen)
     public void tvFragHomeWomenClicked(View view){
-        tFragmentManager.beginTransaction().replace(R.id.container_main, new WomenFragment()).addToBackStack(null).commit();
+      tFragmentManager.beginTransaction().replace(R.id.container_main, new WomenFragment()).addToBackStack(null).commit();
     }
   @OnClick(R.id.tvFragHomeChild)
     public void tvFragHomeChildClicked(View view){

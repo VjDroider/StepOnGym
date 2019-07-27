@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import com.stepon.gymapp.R;
 
 public class FragmentMen extends Fragment {
+
+
     public FragmentMen() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

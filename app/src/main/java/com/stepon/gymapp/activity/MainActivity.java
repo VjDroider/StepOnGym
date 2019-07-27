@@ -3,11 +3,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -18,35 +14,33 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.stepon.gymapp.fragment.AboutUsFragment;
-import com.stepon.gymapp.fragment.ChildFragment;
-import com.stepon.gymapp.fragment.DietFragment;
-import com.stepon.gymapp.fragment.FragmentHome;
-import com.stepon.gymapp.fragment.FragmentMen;
-import com.stepon.gymapp.fragment.GymFragment;
-import com.stepon.gymapp.fragment.WeightFragment;
-import com.stepon.gymapp.fragment.WomenFragment;
 import com.stepon.gymapp.R;
 import com.stepon.gymapp.storage.SharedPrefManager;
+import com.stepon.gymapp.adapter.MyPagerAdapter;
 
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, TabLayout.OnTabSelectedListener {
 
 
     private SharedPrefManager tSharedPrefManager;
     private Context tContext;
-    TabLayout myTab;
-    ViewPager myViewPager;
+    @BindView(R.id.mypager)
+    protected ViewPager myViewPager;
+    @BindView(R.id.view)
+    protected TabLayout myTab;
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
     private ImageView ivLogout;
+    @BindView(R.id.container_main)
+    protected FrameLayout tLayout;
 
 
 
@@ -55,60 +49,36 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
+        initActivity();
+        initTab();
+        initDrawer(toolbar);
 
+
+    }
+    private void initActivity(){
+        tLayout.setVisibility(View.VISIBLE);
         tContext = MainActivity.this;
         tSharedPrefManager = new SharedPrefManager(tContext);
+    }
 
-
-
-
-//TabLayout
-        myTab = findViewById(R.id.view);
-        myViewPager = findViewById(R.id.mypager);
-        ivLogout = findViewById(R.id.ivLogout);
-        ivLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tSharedPrefManager.clearUserData();
-                startActivity(new Intent(MainActivity.this, SplashScreen.class));
-            }
-        });
-        myViewPager.setAdapter(new MyOwnPagerAdapter(getSupportFragmentManager()));
+    @SuppressLint("ResourceAsColor")
+    private void initTab(){
+        myViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), ""));
         myTab.setupWithViewPager(myViewPager);
 
         myTab.setTabTextColors(
                 getResources().getColor(R.color.white),
                 getResources().getColor(R.color.white));
-
         myTab.setSelectedTabIndicatorColor(R.color.white);
-
-
-        myTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                myViewPager.setCurrentItem(tab.getPosition());
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        //tablayout code finish
-
+        myTab.addOnTabSelectedListener(this);
         // remove status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
 
+    private void initDrawer(Toolbar toolbar){
         //drawer layout
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -116,12 +86,11 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
         navigationView.setNavigationItemSelectedListener(this);
 
-
     }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -132,24 +101,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -174,74 +126,25 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @OnClick(R.id.ivLogout)
+    public void ivLogoutClicked(View view){
+    tSharedPrefManager.clearUserData();
+    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+}
 
 
-    class MyOwnPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        myViewPager.setCurrentItem(tab.getPosition());
+    }
 
-        String data[] = {"Home", "Men", "Women", "Child", "Gym", "Diet", "Weight", "AboutUs"};
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
+    }
 
-        public MyOwnPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
-        @Override
-        public Fragment getItem(int position) {
-
-            if (position == 0) {
-
-                return new FragmentHome();
-            }
-
-            if (position == 1) {
-
-                return new FragmentMen();
-
-            }
-            if (position == 2) {
-
-                return new WomenFragment();
-            }
-            if (position == 3) {
-
-                return new ChildFragment();
-            }
-
-            if (position == 4) {
-
-                return new GymFragment();
-            }
-
-            if (position == 5) {
-
-                return new DietFragment();
-            }
-
-
-            if (position == 6) {
-
-                return new WeightFragment();
-            }
-
-
-            if (position == 7) {
-
-                return new AboutUsFragment();
-            }
-
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return data.length;
-        }
-
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return data[position];
-        }
     }
 }
