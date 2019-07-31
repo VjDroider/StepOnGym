@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,33 +15,43 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+
+import com.stepon.gymapp.Api;
 import com.stepon.gymapp.R;
+import com.stepon.gymapp.RetrofitClient;
+import com.stepon.gymapp.adapter.MainPagerAdapter;
+import com.stepon.gymapp.model.ModelCategory;
 import com.stepon.gymapp.storage.SharedPrefManager;
-import com.stepon.gymapp.adapter.MyPagerAdapter;
+import com.stepon.gymapp.utils.Constant;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TabLayout.OnTabSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private TabLayout tTabLayout;
+    private ViewPager tViewPager;
+    private MainPagerAdapter tPagerAdapter;
+
+    private int noOfTabs = 10;
 
     private SharedPrefManager tSharedPrefManager;
     private Context tContext;
-    @BindView(R.id.mypager)
-    protected ViewPager myViewPager;
-    @BindView(R.id.view)
-    protected TabLayout myTab;
+
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-    private ImageView ivLogout;
-    @BindView(R.id.container_main)
-    protected FrameLayout tLayout;
+
+
 
 
 
@@ -52,30 +63,36 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         initActivity();
-        initTab();
         initDrawer(toolbar);
 
 
     }
     private void initActivity(){
-        tLayout.setVisibility(View.VISIBLE);
         tContext = MainActivity.this;
         tSharedPrefManager = new SharedPrefManager(tContext);
+callApi();
     }
 
-    @SuppressLint("ResourceAsColor")
-    private void initTab(){
-        myViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), ""));
-        myTab.setupWithViewPager(myViewPager);
+    private void callApi(){
+       Call<List<ModelCategory>> call = RetrofitClient.getInstance().getApi().getCategory();
+       call.enqueue(new Callback<List<ModelCategory>>() {
+           @Override
+           public void onResponse(Call<List<ModelCategory>> call, Response<List<ModelCategory>> response) {
+               List<ModelCategory> tModels = response.body();
 
-        myTab.setTabTextColors(
-                getResources().getColor(R.color.white),
-                getResources().getColor(R.color.white));
-        myTab.setSelectedTabIndicatorColor(R.color.white);
-        myTab.addOnTabSelectedListener(this);
-        // remove status bar
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+               tPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tModels);
+               tViewPager = findViewById(R.id.mypager);
+               tViewPager.setAdapter(tPagerAdapter);
+               tTabLayout = findViewById(R.id.tabs);
+               tTabLayout.setupWithViewPager(tViewPager);
+           }
+
+           @Override
+           public void onFailure(Call<List<ModelCategory>> call, Throwable t) {
+
+               Log.d(Constant.TAG, "Failure Category Response : "+t);
+           }
+       });
     }
 
     private void initDrawer(Toolbar toolbar){
@@ -133,18 +150,4 @@ public class MainActivity extends AppCompatActivity
 }
 
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        myViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 }

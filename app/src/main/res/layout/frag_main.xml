@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGreen"
-    tools:context=".fragment.DietFragment">
+    android:background="@color/white"
+    tools:context=".fragment.MainFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,61 +16,73 @@
             android:layout_height="wrap_content">
 
             <TextView
-                style="@style/tvStyleHeader"
-                android:text="Diet" />
-
-
+                android:id="@+id/tvFragTitle"
+                style="@style/tvStyleMain"
+                android:text="Title"
+                />
             <TextView
+                android:id="@+id/tvWeekOne"
                 style="@style/tvStyleMain"
                 android:text="Week One"
                 />
 
             <TextView
+                android:id="@+id/tvWeekTwo"
                 style="@style/tvStyleMain"
                 android:text="Week Two"
                 />
 
             <TextView
+                android:id="@+id/tvWeekThree"
                 style="@style/tvStyleMain"
                 android:text="Week Three" />
 
             <TextView
+                android:id="@+id/tvWeekFour"
                 style="@style/tvStyleMain"
                 android:text="Week Four"/>
 
 
             <TextView
+                android:id="@+id/tvWeekFive"
                 style="@style/tvStyleMain"
                 android:text="Week Five" />
 
             <TextView
+                android:id="@+id/tvWeekSix"
                 style="@style/tvStyleMain"
                 android:text="Week Six"
                 />
             <TextView
+                android:id="@+id/tvWeekSeven"
                 style="@style/tvStyleMain"
                 android:text="Week Seven"
                 />
 
             <TextView
+                android:id="@+id/tvWeekEight"
                 style="@style/tvStyleMain"
                 android:text="Week Eight"
                 />
 
             <TextView
+                android:id="@+id/tvWeekNine"
                 style="@style/tvStyleMain"
                 android:text="Week Nine" />
 
             <TextView
+                android:id="@+id/tvWeekTen"
                 style="@style/tvStyleMain"
                 android:text="Week Ten"/>
 
 
             <TextView
+                android:id="@+id/tvWeekEleven"
                 style="@style/tvStyleMain"
                 android:text="Week Eleven" />
 
             <TextView
+                android:id="@+id/tvWeekTwelve"
                 style="@style/tvStyleMain"
                 android:text="Week Twelve"
                 />
