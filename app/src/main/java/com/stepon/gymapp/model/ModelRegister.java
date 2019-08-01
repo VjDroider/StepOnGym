@@ -8,16 +8,16 @@ public class ModelRegister{
 
     @SerializedName("error")
     @Expose
-    private String error;
+    private Boolean error;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public String getError() {
+    public Boolean getError() {
         return error;
     }
 
-    public void setError(String error) {
+    public void setError(Boolean error) {
         this.error = error;
     }
 
@@ -28,5 +28,4 @@ public class ModelRegister{
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

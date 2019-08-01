@@ -9,9 +9,9 @@ import com.stepon.gymapp.model.login.User;
 
 public class ModelLogin{
 
-    @SerializedName("success")
+    @SerializedName("error")
     @Expose
-    private String success;
+    private Boolean error;
     @SerializedName("message")
     @Expose
     private String message;
@@ -19,12 +19,12 @@ public class ModelLogin{
     @Expose
     private User user;
 
-    public String getSuccess() {
-        return success;
+    public Boolean getError() {
+        return error;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
     public String getMessage() {
@@ -42,5 +42,6 @@ public class ModelLogin{
     public void setUser(User user) {
         this.user = user;
     }
+
 
 }

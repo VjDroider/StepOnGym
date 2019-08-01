@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +19,9 @@ import com.stepon.gymapp.model.login.ModelLogin;
 import com.stepon.gymapp.storage.SharedPrefManager;
 import com.stepon.gymapp.utils.Constant;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,20 +30,22 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPrefManager tSharedPrefManager;
     private Context tContext;
-    EditText etemail, etpass;
-    Button btn;
+    @BindView(R.id.etEmailLogin)
+    protected EditText etEmailLogin;
+    @BindView(R.id.etPassLogin)
+    protected EditText etPassLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         tContext = LoginActivity.this;
         tSharedPrefManager = new SharedPrefManager(tContext);
 
-        etemail = findViewById(R.id.et_email_log);
-        etpass = findViewById(R.id.et_pass_pass);
-        btn = findViewById(R.id.btn_log);
+
 
 
     }
@@ -49,39 +53,41 @@ public class LoginActivity extends AppCompatActivity {
 
     private void userLogin() {
 
-        String email = etemail.getText().toString().trim();
-        String password = etpass.getText().toString().trim();
+        String email = etEmailLogin.getText().toString().trim();
+        String password = etPassLogin.getText().toString().trim();
 
 
         if (email.isEmpty()) {
-            etemail.setError("Email is required");
-            etemail.requestFocus();
-            return;
+            etEmailLogin.setError("Email is required");
+            etEmailLogin.requestFocus();
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etemail.setError("Enter a valid email");
-            etemail.requestFocus();
-            return;
+       else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmailLogin.setError("Enter a valid email");
+            etEmailLogin.requestFocus();
         }
 
-        if (password.isEmpty()) {
-            etpass.setError("Password required");
-            etpass.requestFocus();
-            return;
+       else if (password.isEmpty()) {
+            etPassLogin.setError("Password required");
+            etPassLogin.requestFocus();
         }
 
-        if (password.length() < 6) {
-            etpass.setError("Password should be 6 character long");
-            etpass.requestFocus();
-            return;
+        else if (password.length() < 6) {
+            etPassLogin.setError("Password should be 6 character long");
+            etPassLogin.requestFocus();
 
+        }else{
+            callApiLogin(email, password);
         }
 
 
+
+    }
+
+    private void callApiLogin(String strEmail,  String strPassword){
         Call<ModelLogin> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createLogin(email, password);
+                .createLogin(strEmail, strPassword);
 
 
         call.enqueue(new Callback<ModelLogin>() {
@@ -90,23 +96,24 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 ModelLogin tModel = response.body();
-                Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
-
-                String strId = tModel.getUser().getId();
-                String strName = tModel.getUser().getName();
-                String strMobile = tModel.getUser().getMobile();
-                String strEmail = tModel.getUser().getEmail();
-                String strDob = tModel.getUser().getUserDob();
-                String strAddress = tModel.getUser().getAddress();
-                String strDoj = tModel.getUser().getCreatedAt();
-                tSharedPrefManager.setUserData(strId, strName, strMobile, strEmail, strDob, strDoj);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finishAffinity();
-                finish();
-
-
-
+                if (!tModel.getError()) {
+                    Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
+                    String strId = tModel.getUser().getId();
+                    String strName = tModel.getUser().getName();
+                    String strMobile = tModel.getUser().getMobile();
+                    String strEmail = tModel.getUser().getEmail();
+                    String strDob = tModel.getUser().getUserDob();
+                    String strAddress = tModel.getUser().getAddress();
+                    String strDoj = tModel.getUser().getCreatedAt();
+                    tSharedPrefManager.setUserData(strId, strName, strMobile, strEmail, strDob, strDoj);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finishAffinity();
+                    finish();
+                }
+                else  {
+                    Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -118,14 +125,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+@OnClick(R.id.btnLogin)
+    public void btn_logClicked(View view){
+    userLogin();
+}
+@OnClick(R.id.tvSignUp)
+    public void tvSignUpClicked(View view){
+    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+}
 
-    public void onclick(View view) {
-
-        switch (view.getId()) {
-            case R.id.btn_log:
-                userLogin();
-
-                break;
-        }
-    }
 }

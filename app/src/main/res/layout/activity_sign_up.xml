@@ -4,16 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/bnrone"
     android:orientation="vertical"
     tools:context=".activity.RegisterActivity">
 
+    <android.support.v4.widget.NestedScrollView
+        android:background="@color/color_transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="270dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:layout_gravity="center"
-
         android:src="@drawable/logos" />
 
 
@@ -29,80 +37,60 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:orientation="vertical">
-
-
+            <android.support.design.widget.TextInputLayout
+                android:hint="@string/mobile"
+               style="@style/etStyleMainLayout">
             <EditText
-                android:id="@+id/et_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#0fbbf1"
-                android:gravity="center"
-                android:hint="Mobile"
-                android:textColor="@color/white"
-                android:textColorHint="@color/magneta" />
-
+                android:id="@+id/etMobileReg"
+                style="@style/etStyleMain"
+                android:hint="@string/mobile" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:hint="@string/email"
+                style="@style/etStyleMainLayout">
             <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#0fbbf1"
-                android:ems="10"
-                android:gravity="center"
-                android:hint=" Email"
-
-                android:textColor="@color/white"
-
-                android:textColorHint="@color/magneta"
-                android:textColorLink="#00424141" />
-
-
-            <EditText
-
-                android:id="@+id/et_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#6CAEE0"
-                android:ems="10"
-                android:gravity="center"
+                android:id="@+id/etEmailReg"
+                style="@style/etStyleMain"
+                android:hint="@string/email" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                app:passwordToggleEnabled="true"
                 android:hint="Password"
+                app:passwordToggleTint="@color/colorAccent"
+                style="@style/etStyleMainLayout">
+            <EditText
+                android:id="@+id/etPassReg"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
-                android:textColorHint="@color/magneta"
-                android:textColorLink="#00424141" />
-
+                style="@style/etStyleMain"
+                android:hint="@string/password" />
+            </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_reg"
+                android:id="@+id/btnReg"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/custom"
-                android:onClick="onclick"
-                android:text="Registration"
+                android:textAllCaps="false"
+                android:text="@string/registration"
                 android:textColor="@color/white" />
 
-
             <TextView
-
-                android:id="@+id/tv_log_signup"
+                android:id="@+id/tvSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-
-                android:text="Already have an account ? Login"
+                android:layout_marginTop="16dp"
+                android:text="@string/already_have_an_account_login"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
 
 
         </LinearLayout>
 
 
     </LinearLayout>
-
-
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

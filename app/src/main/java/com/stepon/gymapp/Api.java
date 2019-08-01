@@ -3,6 +3,7 @@ package com.stepon.gymapp;
 
 import com.stepon.gymapp.model.ModelCategory;
 import com.stepon.gymapp.model.ModelWeek;
+import com.stepon.gymapp.model.login.ModelDetail;
 import com.stepon.gymapp.model.login.ModelLogin;
 import com.stepon.gymapp.model.ModelRegister;
 
@@ -40,6 +41,11 @@ public interface Api {
     @POST("api_file/gym_week.php")
     Call<List<ModelWeek>> getWeek();
 
+    @FormUrlEncoded
+    @POST("api_file/gym_detail.php")
+    Call<List<ModelDetail>> getDetail(
+            @Field("week_id") String week_id
+    );
 
 
 

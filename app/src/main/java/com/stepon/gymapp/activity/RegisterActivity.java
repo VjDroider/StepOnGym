@@ -5,17 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stepon.gymapp.R;
 import com.stepon.gymapp.RetrofitClient;
 import com.stepon.gymapp.model.ModelRegister;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,100 +23,78 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText etmobile, etemail, etpass;
-    Button btn;
-    TextView tv;
+    @BindView(R.id.etMobileReg)
+    protected EditText etMobileReg;
+    @BindView(R.id.etEmailReg)
+    protected EditText etEmailReg;
+    @BindView(R.id.etPassReg)
+    protected EditText etPassReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        ButterKnife.bind(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-        etmobile = findViewById(R.id.et_mobile);
-        etemail = findViewById(R.id.et_email);
-        etpass = findViewById(R.id.et_pass);
-        btn = findViewById(R.id.btn_reg);
-        //  tv = findViewById(tv_log_signup);
-
     }
 
-
-
-
     private void userSignUp() {
-        String mobile = etmobile.getText().toString().trim();
-        String email = etemail.getText().toString().trim();
-        String password = etpass.getText().toString().trim();
+        String mobile = etMobileReg.getText().toString().trim();
+        String email = etEmailReg.getText().toString().trim();
+        String password = etPassReg.getText().toString().trim();
 
 
         if (email.isEmpty()) {
-            etemail.setError("Email is required");
-            etemail.requestFocus();
-            return;
+            etEmailReg.setError("Email is required");
+            etEmailReg.requestFocus();
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etemail.setError("Enter a valid email");
-            etemail.requestFocus();
-            return;
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmailReg.setError("Enter a valid email");
+            etEmailReg.requestFocus();
         }
-
-        if (password.isEmpty()) {
-            etpass.setError("Password required");
-            etpass.requestFocus();
-            return;
+        else if (password.isEmpty()) {
+            etPassReg.setError("Password required");
+            etPassReg.requestFocus();
         }
-
-        if (password.length() < 6) {
-            etpass.setError("Password should be 6 character long");
-            etpass.requestFocus();
-            return;
-
+        else if (password.length() < 6) {
+            etPassReg.setError("Password should be 6 character long");
+            etPassReg.requestFocus();
         }
-
-
+        else callApiRegister(mobile, email, password);
+    }
+    private void callApiRegister(String strMobile, String strEmail, String strPass){
         Call<ModelRegister> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .userRegister(mobile, email, password);
-
-        //   jaihanuman
-
+                .userRegister(strMobile, strEmail, strPass);
         call.enqueue(new Callback<ModelRegister>() {
             @Override
             public void onResponse(Call<ModelRegister> call, Response<ModelRegister> response) {
-
-                ModelRegister m = response.body();
-
-                Toast.makeText(getApplicationContext(), "Sucess", Toast.LENGTH_LONG).show();
-
-
+                ModelRegister tModel = response.body();
+                if (!tModel.getError()) {
+                    Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    finishAffinity();
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(), tModel.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
-
             @Override
             public void onFailure(Call<ModelRegister> call, Throwable t) {
-
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
-
             }
         });
-
-
     }
-
-
-    public void onclick(View view) {
-
-
-        switch (view.getId()) {
-            case R.id.btn_reg:
-                userSignUp();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                break;
-        }
+    @OnClick(R.id.btnReg)
+    public void btnRegClicked(View view){
+        userSignUp();
     }
+    @OnClick(R.id.tvSignIn)
+    public void tvSignInClicked(View view){
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        finishAffinity();
+        finish();    }
 }

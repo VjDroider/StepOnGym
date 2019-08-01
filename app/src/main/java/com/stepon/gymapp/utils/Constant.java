@@ -17,4 +17,12 @@ public class Constant {
     public static final String USER_DOJ = "user_doj";
     public static final String USER_PRO_PIC = "user_pic";
     public static final  String EMPTY="";
+
+
+
+    public static final  String WEEK_ID="week_id";
+    public static final  String STR_URL="str_url";
+    public static final  String VID_URL="http://siguientesoftwares.in/gym/panel/video/";
+
+
 }

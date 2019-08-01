@@ -79,7 +79,6 @@ callApi();
            @Override
            public void onResponse(Call<List<ModelCategory>> call, Response<List<ModelCategory>> response) {
                List<ModelCategory> tModels = response.body();
-
                tPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tModels);
                tViewPager = findViewById(R.id.mypager);
                tViewPager.setAdapter(tPagerAdapter);
