@@ -21,6 +21,7 @@ public class Constant {
 
 
     public static final  String WEEK_ID="week_id";
+    public static final  String CAT_ID="cat_id";
     public static final  String STR_URL="str_url";
     public static final  String VID_URL="http://siguientesoftwares.in/gym/panel/video/";
 

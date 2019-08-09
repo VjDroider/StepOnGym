@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,76 +27,20 @@
 
 
             <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/tvFragTitle"
                 android:id="@+id/rvFragMain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekOne"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week One"-->
-                <!--/>-->
+            <ProgressBar
+                android:layout_centerInParent="true"
+                android:id="@+id/pbMainFragment"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekTwo"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Two"-->
-                <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekThree"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Three" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekFour"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Four"/>-->
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekFive"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Five" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekSix"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Six"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekSeven"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Seven"-->
-                <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekEight"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Eight"-->
-                <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekNine"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Nine" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekTen"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Ten"/>-->
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekEleven"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Eleven" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvWeekTwelve"-->
-                <!--style="@style/tvStyleMain"-->
-                <!--android:text="Week Twelve"-->
-                <!--/>-->
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </FrameLayout>

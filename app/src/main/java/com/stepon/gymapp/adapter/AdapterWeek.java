@@ -25,10 +25,14 @@ public class AdapterWeek extends RecyclerView.Adapter<AdapterWeek.CategoryViewHo
 
     private Context tContext;
     private List<ModelWeek> tModelsWeek;
+    private List<ModelCategory> tModelsCategory;
+    private int sectionNumber;
 
-    public AdapterWeek(Context tContext, List<ModelWeek> tModelsWeek) {
+    public AdapterWeek(Context tContext, List<ModelWeek> tModelsWeek, List<ModelCategory> tModelsCategory, int sectionNumber) {
         this.tContext = tContext;
         this.tModelsWeek = tModelsWeek;
+        this.tModelsCategory = tModelsCategory;
+        this.sectionNumber = sectionNumber;
     }
 
     @NonNull
@@ -43,15 +47,18 @@ public class AdapterWeek extends RecyclerView.Adapter<AdapterWeek.CategoryViewHo
         ModelWeek tModelWeek = tModelsWeek.get(i);
         final String strWeek = tModelWeek.getWeek();
         final String strWeekId = tModelWeek.getId();
-        categoryViewHolder.tvWeek.setText(strWeek);
-        categoryViewHolder.llFragMainItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent tIntent = new Intent(tContext, DetailActivity.class);
-                tIntent.putExtra(Constant.WEEK_ID, strWeekId);
-                tContext.startActivity(tIntent);
-            }
-        });
+        final String strCatId = tModelsCategory.get(sectionNumber).getId();
+            categoryViewHolder.tvWeek.setText(strWeek);
+            categoryViewHolder.llFragMainItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent tIntent = new Intent(tContext, DetailActivity.class);
+                    tIntent.putExtra(Constant.WEEK_ID, strWeekId);
+                    tIntent.putExtra(Constant.CAT_ID, strCatId);
+                    tContext.startActivity(tIntent);
+                }
+            });
+
     }
 
     @Override

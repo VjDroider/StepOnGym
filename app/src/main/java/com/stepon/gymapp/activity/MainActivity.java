@@ -15,9 +15,8 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
-import com.stepon.gymapp.Api;
 import com.stepon.gymapp.R;
 import com.stepon.gymapp.RetrofitClient;
 import com.stepon.gymapp.adapter.MainPagerAdapter;
@@ -37,41 +36,43 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int DEFAULT_OFFSCREEN_PAGES = 1;
 
-
-    private TabLayout tTabLayout;
-    private ViewPager tViewPager;
     private MainPagerAdapter tPagerAdapter;
-
-    private int noOfTabs = 10;
-
     private SharedPrefManager tSharedPrefManager;
     private Context tContext;
-
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-
-
-
-
+    @BindView(R.id.mypager)
+    protected ViewPager tViewPager;
+    @BindView(R.id.tabs)
+    protected TabLayout tTabLayout;
+    @BindView(R.id.pbMainActivity)
+    protected ProgressBar pbMainActivity;
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         initActivity();
+        setSupportActionBar(toolbar);
         initDrawer(toolbar);
 
+
+
+        callApi();
 
     }
     private void initActivity(){
         tContext = MainActivity.this;
         tSharedPrefManager = new SharedPrefManager(tContext);
-callApi();
+        pbMainActivity.setVisibility(View.VISIBLE);
     }
+
+
+
 
     private void callApi(){
        Call<List<ModelCategory>> call = RetrofitClient.getInstance().getApi().getCategory();
@@ -79,21 +80,18 @@ callApi();
            @Override
            public void onResponse(Call<List<ModelCategory>> call, Response<List<ModelCategory>> response) {
                List<ModelCategory> tModels = response.body();
-               tPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tModels);
-               tViewPager = findViewById(R.id.mypager);
-               tViewPager.setAdapter(tPagerAdapter);
-               tTabLayout = findViewById(R.id.tabs);
-               tTabLayout.setupWithViewPager(tViewPager);
-           }
+               pbMainActivity.setVisibility(View.GONE);
+                   tPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tModels);
+                   tViewPager.setAdapter(tPagerAdapter);
+                   tTabLayout.setupWithViewPager(tViewPager);
 
+           }
            @Override
            public void onFailure(Call<List<ModelCategory>> call, Throwable t) {
-
                Log.d(Constant.TAG, "Failure Category Response : "+t);
            }
        });
     }
-
     private void initDrawer(Toolbar toolbar){
         //drawer layout
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -103,9 +101,7 @@ callApi();
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -141,12 +137,12 @@ callApi();
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @OnClick(R.id.ivLogout)
     public void ivLogoutClicked(View view){
     tSharedPrefManager.clearUserData();
     startActivity(new Intent(MainActivity.this, LoginActivity.class));
 }
+
 
 
 }

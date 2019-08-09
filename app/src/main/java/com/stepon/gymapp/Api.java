@@ -38,13 +38,17 @@ public interface Api {
     @POST("api_file/gym_category.php")
     Call<List<ModelCategory>> getCategory();
 
+    @FormUrlEncoded
     @POST("api_file/gym_week.php")
-    Call<List<ModelWeek>> getWeek();
+    Call<List<ModelWeek>> getWeek(
+            @Field("category_id") String category_id
+    );
 
     @FormUrlEncoded
     @POST("api_file/gym_detail.php")
     Call<List<ModelDetail>> getDetail(
-            @Field("week_id") String week_id
+            @Field("week_id") String week_id,
+            @Field("category_id") String category_id
     );
 
 
