@@ -20,7 +20,6 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter{
         this.tModels = tModels;
     }
 
-
     @Override
     public Fragment getItem(int position) {
 
@@ -31,7 +30,6 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter{
     public int getCount() {
         return tModels.size();
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return tModels.get(position).getName();

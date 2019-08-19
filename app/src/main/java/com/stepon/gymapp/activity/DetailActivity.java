@@ -1,6 +1,7 @@
 package com.stepon.gymapp.activity;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     private AdapterDetail tAdapterDetail;
     private String strWeekId;
     private String strCatId;
+    private FragmentManager tFragmentManager;
 
 
     @BindView(R.id.rvDetail)
@@ -48,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         tContext = DetailActivity.this;
         tLayoutManager = new LinearLayoutManager(this);
         rvDetail.setLayoutManager(tLayoutManager);
+        tFragmentManager = getSupportFragmentManager();
         pbDetailActivity.setVisibility(View.VISIBLE);
         callApi();
     }
@@ -63,7 +66,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onResponse(Call<List<ModelDetail>> call, Response<List<ModelDetail>> response) {
                 List<ModelDetail> tModels = response.body();
                 pbDetailActivity.setVisibility(View.GONE);
-                tAdapterDetail = new AdapterDetail(tContext, tModels);
+                tAdapterDetail = new AdapterDetail(tContext, tModels, tFragmentManager);
                 rvDetail.setAdapter(tAdapterDetail);
             }
 

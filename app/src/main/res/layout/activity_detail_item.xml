@@ -9,31 +9,24 @@
             style="@style/tvStyleHeader"
             android:fontFamily="serif-monospace"
             android:text="Sunday"/>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/tvDetailChest"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvDetailChestDetail"
             style="@style/tvStyleContent"
-            android:drawableEnd="@drawable/ic_video"
             android:text="Chest" />
         <TextView
-            android:id="@+id/tvDetailBiceps"
-            android:drawableEnd="@drawable/ic_video"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:id="@+id/tvDetailChest"
             style="@style/tvStyleContent"
-            android:text="Biceps"/>
-
-
-            <TextView
-                android:id="@+id/tvDetailShoulder"
-                android:drawableEnd="@drawable/ic_video"
-                style="@style/tvStyleContent"
-                android:text="Shoulder"/>
-            <TextView
-                android:id="@+id/tvDetailTriceps"
-                android:drawableEnd="@drawable/ic_video"
-                style="@style/tvStyleContent"
-                android:text="Triceps"/>
-
-
+            android:drawableEnd="@drawable/ic_video"/>
+</LinearLayout>
 
 
 

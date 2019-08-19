@@ -21,4 +21,5 @@
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>
     <string name="stepon">StepOn</string>
+    <string name="menu_paid">Paid</string>
 </resources>

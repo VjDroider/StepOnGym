@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    android:background="@drawable/bnrone"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WorkDetailActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarWorkDetail"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            <TextView
+                android:text="Detail"
+                android:textColor="@color/white"
+                style="@style/tvStyleHeader"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_below="@id/appbarWorkDetail"
+        style="@style/llStyleMain">
+        <TextView
+            android:id="@+id/tvActivityWorkTitle"
+            style="@style/tvStyleHeader"
+            android:fontFamily="serif-monospace"
+            android:text="Title"/>
+
+        <TextView
+            android:id="@+id/tvActivityWorkDetail"
+            style="@style/tvStyleContent"
+            android:text="Detail" />
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>
