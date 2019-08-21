@@ -17,11 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup,supportsRtl, usesCleartextTraffic,android:icon">
-        <activity android:name=".activity.PaidActivity"></activity>
+        <activity android:name=".activity.DietActivity"></activity>
+        <activity android:name=".activity.DayWorkActivity" />
+        <activity android:name=".activity.PaidActivity" />
         <activity android:name=".activity.WorkDetailActivity" />
-        <activity
-            android:name=".activity.VideoActivity"
-            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.DetailActivity"
             android:screenOrientation="portrait" />

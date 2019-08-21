@@ -5,6 +5,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:fontFamily="serif-monospace"
         android:id="@+id/tvWeek"
         style="@style/tvStyleMain"
         android:text="Week One"

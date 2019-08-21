@@ -81,9 +81,14 @@ public class MainActivity extends AppCompatActivity
            public void onResponse(Call<List<ModelCategory>> call, Response<List<ModelCategory>> response) {
                List<ModelCategory> tModels = response.body();
                pbMainActivity.setVisibility(View.GONE);
+
                    tPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tModels);
                    tViewPager.setAdapter(tPagerAdapter);
                    tTabLayout.setupWithViewPager(tViewPager);
+//               }
+//               else {
+//                   Toast.makeText(MainActivity.this, "No data is responding from server", Toast.LENGTH_LONG).show();
+//               }
 
            }
            @Override
@@ -125,10 +130,20 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_diet) {
 
         } else if (id == R.id.nav_share) {
-
+            try {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "StepOn");
+                String shareMessage= "\nLet me recommend you StepOn Application for best Gym training at home.\nDownload the app by the given link\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + Constant.APP_ID +"\n\n";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "Share by"));
+            } catch(Exception e) {
+                //e.toString();
+            }
         } else if (id == R.id.nav_paid) {
 
             startActivity(new Intent(MainActivity.this, PaidActivity.class));

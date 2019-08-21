@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bnrone"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".activity.PaidActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarDetail"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
 
-        android:layout_height="match_parent"
-        tools:context=".activity.PaidActivity">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            <TextView
+                android:id="@+id/tvDetailToolbar"
+                android:text="Our Paid Services"
+                android:textColor="@color/white"
+                style="@style/tvStyleHeader"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
         <LinearLayout
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_weight="1"
@@ -94,4 +118,4 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>

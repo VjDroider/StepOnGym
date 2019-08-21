@@ -24,28 +24,28 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
             <TextView
-                android:text="Detail"
+                android:text="Description"
                 android:textColor="@color/white"
                 style="@style/tvStyleHeader"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_below="@id/appbarWorkDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
         style="@style/llStyleMain">
         <TextView
             android:id="@+id/tvActivityWorkTitle"
             style="@style/tvStyleHeader"
             android:fontFamily="serif-monospace"
             android:text="Title"/>
-
         <TextView
             android:id="@+id/tvActivityWorkDetail"
             style="@style/tvStyleContent"
             android:text="Detail" />
 
-
-
-
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

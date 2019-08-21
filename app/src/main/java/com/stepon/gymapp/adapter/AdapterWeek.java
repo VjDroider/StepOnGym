@@ -53,6 +53,7 @@ public class AdapterWeek extends RecyclerView.Adapter<AdapterWeek.CategoryViewHo
                 @Override
                 public void onClick(View v) {
                     Intent tIntent = new Intent(tContext, DetailActivity.class);
+                    tIntent.putExtra(Constant.WEEK_NAME, strWeek);
                     tIntent.putExtra(Constant.WEEK_ID, strWeekId);
                     tIntent.putExtra(Constant.CAT_ID, strCatId);
                     tContext.startActivity(tIntent);

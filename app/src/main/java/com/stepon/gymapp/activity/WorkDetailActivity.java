@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.stepon.gymapp.R;
+import com.stepon.gymapp.model.ModelDayWork;
 import com.stepon.gymapp.model.login.ModelDetail;
 import com.stepon.gymapp.utils.Constant;
 
@@ -21,13 +22,13 @@ public class WorkDetailActivity extends AppCompatActivity {
     @BindView(R.id.tvActivityWorkDetail)
     protected TextView tvActivityWorkDetail;
 
-    private ModelDetail tModel;
+    private ModelDayWork tModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_detail);
         ButterKnife.bind(this);
-        tModel = (ModelDetail) getIntent().getSerializableExtra("ModelDetail");
+        tModel = (ModelDayWork) getIntent().getSerializableExtra("ModelDetail");
         tvActivityWorkTitle.setText(tModel.getWorkoutTitle());
         Spanned htmlAsSpanned = Html.fromHtml(tModel.getWorkoutDetail());
         tvActivityWorkDetail.setText(htmlAsSpanned);

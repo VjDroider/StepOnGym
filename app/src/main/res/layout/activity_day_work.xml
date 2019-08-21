@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bnrone"
+        tools:context=".activity.DayWorkActivity">
+    <LinearLayout
+        style="@style/llStyleMain">
+        <TextView
+            android:id="@+id/tvDayWorkDay"
+            style="@style/tvStyleHeader"
+            android:fontFamily="serif-monospace"
+            android:text="Sunday"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDayWork"
+            android:nestedScrollingEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

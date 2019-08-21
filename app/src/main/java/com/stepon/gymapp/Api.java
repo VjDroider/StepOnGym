@@ -2,6 +2,7 @@ package com.stepon.gymapp;
 
 
 import com.stepon.gymapp.model.ModelCategory;
+import com.stepon.gymapp.model.ModelDayWork;
 import com.stepon.gymapp.model.ModelWeek;
 import com.stepon.gymapp.model.login.ModelDetail;
 import com.stepon.gymapp.model.login.ModelLogin;
@@ -49,6 +50,14 @@ public interface Api {
     Call<List<ModelDetail>> getDetail(
             @Field("week_id") String week_id,
             @Field("category_id") String category_id
+    );
+
+ @FormUrlEncoded
+    @POST("api_file/gym_day_work.php")
+    Call<List<ModelDayWork>> getDayWork(
+            @Field("week_id") String week_id,
+            @Field("category_id") String category_id,
+            @Field("day") String day
     );
 
 

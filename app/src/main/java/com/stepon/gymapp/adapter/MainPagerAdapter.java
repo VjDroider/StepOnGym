@@ -25,7 +25,6 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter{
 
         return MainFragment. newInstance(position + 1, tModels);
     }
-
     @Override
     public int getCount() {
         return tModels.size();
