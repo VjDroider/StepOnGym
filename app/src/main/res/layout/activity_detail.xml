@@ -10,7 +10,7 @@
     tools:context=".activity.DetailActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarDetail"
+        android:id="@+id/appbarDiet"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         tools:ignore="MissingConstraints">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
@@ -39,7 +39,7 @@
         <!--android:layout_height="wrap_content"/>
         -->
     <ScrollView
-        android:layout_below="@id/appbarDetail"
+        android:layout_below="@id/appbarDiet"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout

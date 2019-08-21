@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.DietDetailFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            style="@style/llStyleMain">
+            <TextView
+                android:id="@+id/tvDietDetailTitle"
+                style="@style/tvStyleHeader"
+                android:fontFamily="serif-monospace"
+                android:text="Title"/>
+            <TextView
+                android:id="@+id/tvDietDetailDetail"
+                style="@style/tvStyleContent"
+                android:text="Detail" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

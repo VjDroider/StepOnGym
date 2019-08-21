@@ -9,6 +9,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".payumoney.BaseApplication"
         android:icon="@mipmap/applogo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/applogo"
@@ -17,7 +18,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup,supportsRtl, usesCleartextTraffic,android:icon">
-        <activity android:name=".activity.DietActivity"></activity>
+        <activity android:name=".activity.PaidDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".payumoney.PaymentActivity" />
+        <activity android:name=".activity.DietActivity" />
         <activity android:name=".activity.DayWorkActivity" />
         <activity android:name=".activity.PaidActivity" />
         <activity android:name=".activity.WorkDetailActivity" />

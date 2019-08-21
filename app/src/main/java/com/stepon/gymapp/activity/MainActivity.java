@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private MainPagerAdapter tPagerAdapter;
     private SharedPrefManager tSharedPrefManager;
     private Context tContext;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.toolbar_detail)
     protected Toolbar toolbar;
     @BindView(R.id.mypager)
     protected ViewPager tViewPager;
@@ -125,13 +125,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_diet) {
-
+            startActivity(new Intent(MainActivity.this, DietActivity.class));
         } else if (id == R.id.nav_share) {
             try {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);

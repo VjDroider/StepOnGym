@@ -3,10 +3,13 @@ package com.stepon.gymapp;
 
 import com.stepon.gymapp.model.ModelCategory;
 import com.stepon.gymapp.model.ModelDayWork;
+import com.stepon.gymapp.model.ModelDiet;
 import com.stepon.gymapp.model.ModelWeek;
 import com.stepon.gymapp.model.login.ModelDetail;
 import com.stepon.gymapp.model.login.ModelLogin;
 import com.stepon.gymapp.model.ModelRegister;
+import com.stepon.gymapp.model.paid.ModelCombo;
+import com.stepon.gymapp.model.paid.ModelInd;
 
 import java.util.List;
 
@@ -59,6 +62,13 @@ public interface Api {
             @Field("category_id") String category_id,
             @Field("day") String day
     );
+
+ @POST("api_file/gym_diet.php")
+    Call<List<ModelDiet>> getDietList();
+@POST("api_file/gym_ind.php")
+    Call<List<ModelInd>> getIndPcakage();
+@POST("api_file/gym_combo.php")
+    Call<List<ModelCombo>> getComboPackage();
 
 
 

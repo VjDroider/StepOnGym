@@ -21,6 +21,9 @@ public class Constant {
 
 
 
+    public static final  String PAID_TITLE="paid_title";
+    public static final  String PAID_DETAIL="paid_detail";
+    public static final  String PAID_PRICE="paid_price";
     public static final  String WEEK_NAME="week_name";
     public static final  String WEEK_ID="week_id";
     public static final  String CAT_ID="cat_id";

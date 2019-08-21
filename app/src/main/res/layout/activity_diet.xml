@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout android:background="@drawable/bnrone"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DietActivity">
+    tools:context=".activity.DietActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarDiet"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            <TextView
+                android:id="@+id/tvDetailToolbar"
+                android:text="@string/diet_list"
+                android:textColor="@color/white"
+                style="@style/tvStyleHeader"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+    android:id="@+id/diet_container"
+        android:layout_below="@id/appbarDiet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</RelativeLayout>
